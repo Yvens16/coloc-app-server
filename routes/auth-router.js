@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.post("/signup", (req, res, next) => {
   const {
+    fisrtName,
     lastName,
-    firstName,
     age,
     sexe,
     job,
@@ -27,7 +27,8 @@ router.post("/signup", (req, res, next) => {
     roomNum,
     area,
     description,
-    picture
+    picture,
+    role
   } = req.body;
 
   // encrypt the submitted password
@@ -54,7 +55,8 @@ router.post("/signup", (req, res, next) => {
     roomNum,
     area,
     description,
-    picture
+    picture,
+    role
   })
     .then(userDoc => {
       // LOG IN THIS USER
