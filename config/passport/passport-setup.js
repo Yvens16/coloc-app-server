@@ -1,6 +1,6 @@
 const passport = require("passport");
 
-const User = require("../../models/User.js");
+const User = require("../../models/user-model.js");
 
 // serializeUser(): defines what user data to save in the session
 // (happens when you log in successfully)
