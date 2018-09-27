@@ -22,3 +22,11 @@ passport.deserializeUser((userId, done) => {
     })
     .catch(err => done(err));
 });
+
+function passportSetup(app) {
+  // add Passport properties and methods to the "request" object in our ROUTES
+  app.use(passport.initialize());
+  app.use(passport.session());
+}
+
+module.exports = passportSetup;
