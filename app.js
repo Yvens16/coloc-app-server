@@ -58,6 +58,6 @@ app.use(
 passportSetup(app);
 
 const authRouter = require("./routes/auth-router.js");
-app.use("/", authRouter);
+app.use("/api", authRouter);
 
 module.exports = app;

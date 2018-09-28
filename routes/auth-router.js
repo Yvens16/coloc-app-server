@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post("/signup", (req, res, next) => {
   const {
-    fisrtName,
+    firstName,
     lastName,
     age,
     sexe,
@@ -36,7 +36,7 @@ router.post("/signup", (req, res, next) => {
 
   User.create({
     lastName,
-    fisrtName,
+    firstName,
     age,
     sexe,
     job,
