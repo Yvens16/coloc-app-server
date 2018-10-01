@@ -18,6 +18,8 @@ router.post("/flats", (req, res, next) => {
     picture
   } = req.body;
 
+  const owner= req.user._id
+
   Flat.create({
     streetNum,
     address,
@@ -28,7 +30,8 @@ router.post("/flats", (req, res, next) => {
     roomNum,
     area,
     description,
-    picture
+    picture,
+    owner
   })
     .then(flatDoc => res.json(flatDoc))
     .catch(err => next(err));

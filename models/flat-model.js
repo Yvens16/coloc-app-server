@@ -12,8 +12,13 @@ const flatSchema= new Schema({
   housing: {type: String, enum:["Studio", "Appartment", "Duplex", "Loft", "House", "cabine", "Chalet", "Boat", "Farm"], required:true},
   roomNum: {type: Number, required:true},
   area: {type: Number, required:true},
-  description: {type: Number, required:true},
-  picture: {type: String, required:true}
+  description: {type: String, required:true},
+  picture: {type: String},
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref:"User",
+    required:true
+  }
 }, {
   timestamps:true
 })
