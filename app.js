@@ -57,7 +57,13 @@ app.use(
 // Passport setup AFTER SESSION
 passportSetup(app);
 
+const flatRouter = require("./routes/flat-router.js");
+app.use("/api", flatRouter);
+
 const authRouter = require("./routes/auth-router.js");
 app.use("/api", authRouter);
+
+const fileRouter = require("./routes/file-router.js");
+app.use("/api", fileRouter);
 
 module.exports = app;
