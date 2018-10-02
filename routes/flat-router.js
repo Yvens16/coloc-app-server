@@ -18,7 +18,7 @@ router.post("/flats", (req, res, next) => {
     picture
   } = req.body;
 
-  const owner= req.user._id
+  const owner = req.user._id;
 
   Flat.create({
     streetNum,
