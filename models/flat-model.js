@@ -28,7 +28,7 @@ const flatSchema = new Schema(
     roomNum: { type: Number, required: true },
     area: { type: Number, required: true },
     description: { type: String, required: true },
-    picture: { type: String },
+    picture: { type: Array },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "User",
