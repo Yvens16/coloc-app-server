@@ -18,7 +18,7 @@ router.post("/flats", (req, res, next) => {
     picture
   } = req.body;
 
-  const owner= req.user._id
+  const owner = req.user._id;
 
   Flat.create({
     streetNum,
@@ -34,6 +34,13 @@ router.post("/flats", (req, res, next) => {
     owner
   })
     .then(flatDoc => res.json(flatDoc))
+    .catch(err => next(err));
+});
+
+router.get("/flats", (req, res, next) => {
+  Flat.find()
+    .sort({ createdAt: -1 }) //newest phone first (reverse order)
+    .then(flatResults => res.json(flatResults))
     .catch(err => next(err));
 });
 
