@@ -12,17 +12,7 @@ const flatSchema = new Schema(
     roomMate: { type: Number, required: true },
     housing: {
       type: String,
-      enum: [
-        "Studio",
-        "Appartment",
-        "Duplex",
-        "Loft",
-        "House",
-        "cabine",
-        "Chalet",
-        "Boat",
-        "Farm"
-      ],
+      enum: ["Studio", "Appartment", "Duplex", "Loft", "House", "Boat"],
       required: true
     },
     roomNum: { type: Number, required: true },
