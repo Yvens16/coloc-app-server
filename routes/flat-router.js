@@ -37,12 +37,20 @@ router.post("/flats", (req, res, next) => {
     .catch(err => next(err));
 });
 
+router.get("/flats", (req, res, next) => {
+  Flat.find()
+  .sort({ createdAt: -1}) //newest flat first
+  .then(flatResult => res.json(flatResult))
+  .catch(err => next(err))
+});
+
 router.get("/my-flats", (req, res, next) => {
   Flat.find({ owner: { $eq: req.user._id } })
     .sort({ createdAt: -1 }) //newest phone first (reverse order)
     .then(flatResults => res.json(flatResults))
     .catch(err => next(err));
 });
+
 
 router.get("/flats/:id", (req, res, next) => {
   const { id } = req.params;
