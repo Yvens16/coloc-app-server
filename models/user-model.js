@@ -29,6 +29,10 @@ const userSchema = new Schema(
       required: true,
       match: /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/
     },
+    likes:[  {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }],
     encryptedPassword: { type: String },
     role: { type: String, enum: ["owner", "normal"], required: true }
   },

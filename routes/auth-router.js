@@ -119,4 +119,71 @@ router.get("/checklogin", (req, res, next) => {
   }
 });
 
+router.get("/profile/:id", (req, res, next) =>{
+  const { id } = req.params;
+  User.findById(id)
+  .then(userDoc => res.json(userDoc))
+  .catch(err => next(err))
+})
+
+router.put("/profile/:id", (req, res, next) => {
+  const { id } = req.params;
+  const {
+    lastName,
+      firstName,
+      age,
+      sexe,
+      job,
+      presentation,
+      avatar,
+      budget,
+      email,
+      phone,
+      originalPassword
+  } = req.body;
+
+  const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
+
+  User.findByIdAndUpdate(
+    id,
+    {
+    $set: {
+      lastName,
+      firstName,
+      age,
+      sexe,
+      job,
+      presentation,
+      avatar,
+      budget,
+      email,
+      phone,
+      encryptedPassword
+    }
+  },
+  { runValidators: true, new:true }
+  )
+  .then(userDoc => res.json(userDoc))
+  .catch(err => next(err))
+});
+
+router.post("/likes/:id", (req,res, next) =>{
+  const { id } = req.params;
+  const currentUser = req.user._id
+
+  User.findByIdAndUpdate(
+    id, 
+    {
+      $push:{
+        likes: currentUser
+      }
+    },
+    { runValidators: true, new:true }
+  )
+  .then(userDoc => res.json(userDoc))
+  .catch(err => next(err))
+})
+
+
+
 module.exports = router;
