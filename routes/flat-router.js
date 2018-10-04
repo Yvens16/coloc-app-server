@@ -40,9 +40,12 @@ router.post("/flats", (req, res, next) => {
 // See the room list with "normal" user
 router.get("/flats", (req, res, next) => {
   Flat.find()
+    .populate("owner")
     .sort({ createdAt: -1 }) //newest flat first
     .then(flatResult => res.json(flatResult))
     .catch(err => next(err));
+
+
 });
 
 // See flat-list of one owner
@@ -53,13 +56,23 @@ router.get("/my-flats", (req, res, next) => {
     .catch(err => next(err));
 });
 
-// See details of one flat with id
+// See details of one flat with id for owner
 router.get("/flats/:id", (req, res, next) => {
   const { id } = req.params;
   Flat.findById(id)
     .then(flatDoc => res.json(flatDoc))
     .catch(err => next(err));
 });
+
+//room details for  normal User 
+router.get("/room-details/:id", (req, res, next) => {
+  const { id } = req.params;
+  Flat.findById(id)
+  .populate('owner')
+  .then(flatDoc => res.json(flatDoc))
+  .catch(err =>next(err) )
+})
+
 
 // Remove one flat
 router.delete("/flats/:id", (req, res, next) => {
@@ -106,5 +119,12 @@ router.put("/flats/:id", (req, res, next) => {
     .then(flatDoc => res.json(flatDoc))
     .catch(err => next(err));
 });
+
+router.get("/owner/:id", (req, res, next) => {
+  const { id } = req.params
+  User.findById(id)
+  .then(userDoc = res.json(userDoc))
+  .catch(err => (err));
+})
 
 module.exports = router;
